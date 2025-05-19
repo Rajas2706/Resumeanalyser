@@ -1,3 +1,5 @@
+const Resume = require('../models/Resume');
+
 const fs = require('fs');
 const pdf = require('pdf-parse');
 const path = require('path');
@@ -39,3 +41,4 @@ const uploadResume = async (req, res) => {
     res.status(500).json({ message: "Error analyzing resume", error: err });
   }
 };
+module.exports = { uploadResume };
