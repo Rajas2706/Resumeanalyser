@@ -1,13 +1,21 @@
 const express = require('express');
-const router = express.Router();
-const { uploadResume, analyzeResume } = require('../controllers/resumeController');
 const multer = require('multer');
+const { uploadResume } = require('../controllers/resumeController');
 
-// Store file in memory (RAM)
-const storage = multer.memoryStorage();
+const router = express.Router();
+
+// Setup Multer for file storage
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+
 const upload = multer({ storage: storage });
 
 router.post('/upload', upload.single('resume'), uploadResume);
-router.get('/analyze/:userId', analyzeResume);
 
 module.exports = router;
