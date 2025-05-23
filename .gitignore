@@ -1,0 +1,17 @@
+# Ignore environment files
+.env
+
+# Node.js
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+env/
+venv/
+
+# System files
+.DS_Store
+
+# Logs
+*.log
